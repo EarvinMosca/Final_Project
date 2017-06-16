@@ -19,4 +19,6 @@ accordance to the paradigm of polymorphism.
 
 -Use a combination of generic algorithms copy_if and accumulate to calculate int BlackJack::get_score(), since the class Blackjack deals with a vector of cards.
 
+-Blackjack hands could have been implemented to make full use of iterators.
+
 

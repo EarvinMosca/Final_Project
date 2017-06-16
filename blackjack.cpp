@@ -81,3 +81,34 @@ void BlackJack::Print(){
 std::vector<Card> BlackJack::get_Cards(){
    return cards;
 }
+
+/* *************************************************
+Player class
+************************************************* */
+Player::Player() {
+    money = 0;
+}
+
+
+Player::Player(int m) {
+    money = m;
+}
+
+int Player::get_money() const{
+    return money;
+}
+
+void Player::blackjack(int b) {
+    money = money + 1.5*b;
+    return;
+}
+
+void Player::lose_bet(int b) {
+    money = money - b;
+    return;
+}
+
+void Player::win_bet(int b) {
+    money = money + 2*b;
+    return;
+}

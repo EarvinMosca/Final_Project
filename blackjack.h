@@ -25,4 +25,25 @@ public:
     void Print();
 };
 
+class Player {
+public:
+    // Constructor.
+    //    Assigns initial amount of money
+    Player(int m);
+    Player();
+    //Accessors
+    int get_money() const;
+
+    //Mutators
+    void blackjack(int b);
+    void lose_bet(int b);
+    void win_bet(int b);
+
+
+
+private:
+    int money;
+
+};
+
 #endif // BLACKJACK_H

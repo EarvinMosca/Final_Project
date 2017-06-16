@@ -21,6 +21,7 @@ public:
     Deck deck;
     int spaceplayer;
     int spacecroupier;
+    Player p;
     // methods
     void first_deal();
 

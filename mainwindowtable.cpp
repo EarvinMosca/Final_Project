@@ -11,18 +11,16 @@
 #include <QtGui>
 #include <QIcon>
 
-
-
 MainWindowTable::MainWindowTable(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindowTable)
 {
     spaceplayer=250;
-    p=Player(100);
+    p=Player(bankrollcash);
     ui->setupUi(this);
     ui->pushButtonHit->setEnabled(false);
     ui->pushButtonStay->setEnabled(false);
-    ui->cashlabel->setNum(p.get_money());
+    ui->cashlabel->setNum(bankrollcash);
 
 }
 
@@ -85,6 +83,7 @@ void MainWindowTable::on_pushButtonDEAL_clicked()
     else if(player.get_score() == 21){
         ui->scp->setText(scp.setNum(player.get_score()));
         p.blackjack(ui->betslider->value());
+        bankrollcash=p.get_money();
          ui->cashlabel->setNum(p.get_money());
         ui->pushButtonHit->setEnabled(false);
         //QMessageBox::information(this, "RESULT","BLACK JACK 21! You won!");
@@ -121,6 +120,8 @@ void MainWindowTable::on_pushButtonHit_clicked()
         if(player.get_score()>21){
             plyrcards=player.get_Cards();
             p.lose_bet(ui->betslider->value());
+            *cash_p=p.get_money();
+             ui->cashlabel->setNum(p.get_money());
             ui->pushButtonHit->setEnabled(false);
             //QMessageBox::information(this, "RESULT","Bust! You lost." );
             QMessageBox res;
@@ -135,6 +136,8 @@ void MainWindowTable::on_pushButtonHit_clicked()
         else if(player.get_score()==21){
             plyrcards=player.get_Cards();
             p.blackjack(ui->betslider->value());
+            *cash_p=p.get_money();
+             ui->cashlabel->setNum(p.get_money());
             ui->pushButtonHit->setEnabled(false);
             //QMessageBox::information(this, "RESULT","BLACK JACK 21! You won!");
             QMessageBox res;
@@ -196,6 +199,7 @@ void MainWindowTable::on_pushButtonStay_clicked()
             QString scrc;
             QString msg2 = "The dealer has busted! \nYour Score: "+scrp.setNum(player.get_score())+" \nDealer's Score: "+scrc.setNum(croupier.get_score());
             p.win_bet(ui->betslider->value());
+            *cash_p=p.get_money();
             ui->cashlabel->setNum(p.get_money());
             QMessageBox res;
             res.setText("You Won!");
@@ -212,6 +216,7 @@ void MainWindowTable::on_pushButtonStay_clicked()
                 QString scrc;
                 QString msg2 = "You've got the dealer beat! \nYour score: "+scrp.setNum(player.get_score())+"\n Dealer's Score: "+scrc.setNum(croupier.get_score());
                 p.win_bet(ui->betslider->value());
+                *cash_p=p.get_money();
                  ui->cashlabel->setNum(p.get_money());
                 QMessageBox res;
                 res.setText("You Won!");
@@ -243,6 +248,7 @@ void MainWindowTable::on_pushButtonStay_clicked()
             QString scrc;
             QString msg2 = "Your score: "+scrp.setNum(player.get_score())+" \nDealer's score: "+scrc.setNum(croupier.get_score());
             p.lose_bet(ui->betslider->value());
+            *cash_p=p.get_money();
              ui->cashlabel->setNum(p.get_money());
             QMessageBox res;
             res.setText("You Lost!");
@@ -259,6 +265,7 @@ void MainWindowTable::on_pushButtonStay_clicked()
             QString scrc;
             QString msg2 = "Your Score: "+scrp.setNum(player.get_score())+" \nDealer's Score: "+scrc.setNum(croupier.get_score());
             p.lose_bet(ui->betslider->value());
+            *cash_p=p.get_money();
              ui->cashlabel->setNum(p.get_money());
             QMessageBox res;
             res.setText("You Lost!");
@@ -279,6 +286,7 @@ void MainWindowTable::on_pushButtonStay_clicked()
             QString scrc;
             QString msg2 = "The dealer has you beat! \nYour score: "+scrp.setNum(player.get_score())+" \nDealer's score: "+scrc.setNum(croupier.get_score());
             p.lose_bet(ui->betslider->value());
+            *cash_p=p.get_money();
              ui->cashlabel->setNum(p.get_money());
             QMessageBox res;
             res.setText("You lost!");
@@ -294,6 +302,7 @@ void MainWindowTable::on_pushButtonStay_clicked()
             QString scrc;
             QString msg2 = "Your score: "+scrp.setNum(player.get_score())+" \nDealer's score: "+scrc.setNum(croupier.get_score());
             p.win_bet(ui->betslider->value());
+            *cash_p=p.get_money();
              ui->cashlabel->setNum(p.get_money());
             QMessageBox res;
             res.setText("You won!");
